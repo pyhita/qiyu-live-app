@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+    url: jdbc:shardingsphere:classpath:qiyu-db-sharding.yaml
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      lettuce:
+        pool:
+          max-idle: 5000
+          min-idle: 1000
+  application:
+    name: qiyu-live-user
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mappers/*.xml
+
+
+# rocketmq 配置
+qiyu:
+  rmq:
+    consumer:
+      nameSrv: 192.168.233.8:9876
+      groupName: ${spring.application.name}
+    producer:
+      nameSrv: 192.168.233.8:9876
+      groupName: ${spring.application.name}
+      retryTimes: 3
+      sendTimeOut: 3000

@@ -1,0 +1,2 @@
+com.yangtao.framework.redis.starter.RedisConfig
+com.yangtao.framework.redis.key.UserProviderCacheKeyBuilder

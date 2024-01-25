@@ -1,0 +1,40 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: qiyu-live-user
+  profiles:
+    active: test
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      # 照抄的朋友们，请将127.0.0.1及8848改为你们的nacos配置的地址和端口
+      server-addr: 127.0.0.1:8848
+      config:
+        # 照抄的朋友们，请将以下配置改为你们nacos中对应的配置
+        group: DEFAULT_GROUP
+        prefix: application
+        file-extension: yaml
+        namespace: da2e9664-cf94-4100-922a-1e92ad91216e
+dubbo:
+  application:
+    # 此处没有延用spring.application.name是因为当前项目本身也会注册到nacos中，如果dubbo也延用相同的名称，在nacos服务里会看到注册的producer-server服务数为2
+    # 我个人认为这会造成服务混乱，毕竟一个是该服务本身，一个是dubbo相互调用要使用的注册
+    # 如果我的理解是错误的，希望朋友们在评论中给予指定，目前这样配置之后，会在nacos中看到该服务注册了两个，一个是producer-server，另一个是producer-dubbo-server
+    name: producer-dubbo-server
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    # 配置dubbo的注册中心为nacos
+    address: nacos://${spring.cloud.nacos.server-addr}
+    username: ${spring.cloud.nacos.username}
+    password: ${spring.cloud.nacos.password}
+    group: ${spring.cloud.nacos.config.group}
+  metadata-report:
+    # 貌似下面这个配置也没什么作用
+    group: ${spring.cloud.nacos.config.group}
+    parameters:
+      # 貌似想配置dubbo注册到nacos的指定namespace下，好像不太行，即使这样配置了，也是在public下，如果有朋友知道如何配置，希望在评论中给予指正
+      namespace: ${spring.cloud.nacos.config.namespace}

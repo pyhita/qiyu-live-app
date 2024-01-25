@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yangtao.dao.mapper.UserMapper">
+
+
+    <select id="selectByIdList" resultType="com.yangtao.dao.po.UserPO">
+        SELECT *
+        FROM t_user
+        WHERE user_id IN
+        <foreach collection="userIdList" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <update id="updateById">
+        UPDATE t_user
+        <set>
+            <if test="nickName!=null and nickName!=''">
+                nick_name = #{nickName}
+            </if>
+            <if test="trueName!=null and trueName!=''">
+                true_name = #{trueName}
+            </if>
+            <if test="avatar!=null and avatar!=''">
+                avatar = #{avatar}
+            </if>
+            <if test="sex!=null">
+                sex = #{sex}
+            </if>
+            <if test="workCity!=null">
+                workCity = #{workCity}
+            </if>
+            <if test="bornCity!=null">
+                bornCity = #{bornCity}
+            </if>
+        </set>
+        WHERE user_id = #{userId}
+    </update>
+
+</mapper>
