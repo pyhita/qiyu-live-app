@@ -17,6 +17,7 @@ public class ShardingJdbcDatasourceAutoInitConnectionConfig {
     @Bean
     public ApplicationRunner runner(DataSource dataSource) {
         return args -> {
+            // 初始化连接
             LOGGER.info("dataSource: {}", dataSource);
             Connection connection = dataSource.getConnection();
         };

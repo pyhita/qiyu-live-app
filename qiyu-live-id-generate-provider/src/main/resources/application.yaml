@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: qiyu-live-id-generate-provider
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #访问主库
+    url: jdbc:mysql://localhost:3306/qiyu_live_common?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+server:
+  port: 9090

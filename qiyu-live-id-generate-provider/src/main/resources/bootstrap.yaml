@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      server-addr: localhost:8848
+      discovery:
+        namespace: da2e9664-cf94-4100-922a-1e92ad91216e
+        group: DEFAULT_GROUP
+
+dubbo:
+  application:
+    name: ${spring.application.name}
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    # 配置dubbo的注册中心为nacos
+    address: nacos://${spring.cloud.nacos.server-addr}
+    username: ${spring.cloud.nacos.username}
+    password: ${spring.cloud.nacos.password}
+    group: ${spring.cloud.nacos.discovery.group}

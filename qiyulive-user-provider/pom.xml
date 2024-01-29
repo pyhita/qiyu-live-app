@@ -105,6 +105,11 @@
             <artifactId>rocketmq-client</artifactId>
             <version>${rocketmq.client.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.yangtao</groupId>
+            <artifactId>qiyu-live-id-generate-provider</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
